@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionnaire de Tâches</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><span class="highlight">Task</span>Manager</h1>
+      <p class="app-description">Gérez vos tâches efficacement</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="task-controls">
+      <div class="controls-row">
+        <button id="new-task-btn" class="btn btn-primary" aria-label="Ajouter une nouvelle tâche">
+          <span class="icon">+</span> Nouvelle Tâche
+        </button>
+        
+        <div class="filter-sort-container">
+          <div class="filter-group">
+            <label for="status-filter" class="visually-hidden">Filtrer par statut</label>
+            <select id="status-filter" aria-label="Filtrer les tâches par statut">
+              <option value="all">Toutes les tâches</option>
+              <option value="active">En cours</option>
+              <option value="completed">Terminées</option>
+            </select>
+          </div>
+          
+          <div class="sort-group">
+            <label for="sort-by" class="visually-hidden">Trier par</label>
+            <select id="sort-by" aria-label="Trier les tâches">
+              <option value="date-asc">Date (plus proche)</option>
+              <option value="date-desc">Date (plus lointaine)</option>
+              <option value="priority-desc">Priorité (élevée à basse)</option>
+              <option value="priority-asc">Priorité (basse à élevée)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tasks-container" id="tasks-container" aria-live="polite">
+      <div id="tasks-list" class="tasks-list">
+        <!-- Tasks will be inserted here dynamically -->
+        <p id="no-tasks-message" class="no-tasks-message">Aucune tâche à afficher. Créez-en une nouvelle !</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Task Form Modal -->
+  <div id="task-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-content" role="document">
+      <div class="modal-header">
+        <h2 id="modal-title">Ajouter une Tâche</h2>
+        <button id="close-modal" class="close-btn" aria-label="Fermer">&times;</button>
+      </div>
+      <form id="task-form">
+        <input type="hidden" id="task-id">
+        <div class="form-group">
+          <label for="task-title">Titre <span class="required">*</span></label>
+          <input type="text" id="task-title" required aria-required="true" placeholder="Entrez le titre de la tâche">
+          <div class="error-message" id="title-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="task-description">Description</label>
+          <textarea id="task-description" rows="3" placeholder="Décrivez votre tâche (optionnel)"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="task-due-date">Date d'échéance <span class="required">*</span></label>
+            <input type="date" id="task-due-date" required aria-required="true">
+            <div class="error-message" id="date-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="task-priority">Priorité <span class="required">*</span></label>
+            <select id="task-priority" required aria-required="true">
+              <option value="">Sélectionner</option>
+              <option value="low">Basse</option>
+              <option value="medium">Moyenne</option>
+              <option value="high">Élevée</option>
+            </select>
+            <div class="error-message" id="priority-error"></div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancel-task" class="btn btn-secondary">Annuler</button>
+          <button type="submit" id="save-task" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="delete-modal-title">
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <h2 id="delete-modal-title">Confirmer la suppression</h2>
+        <button class="close-btn" id="close-delete-modal" aria-label="Fermer">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir supprimer cette tâche ? Cette action ne peut pas être annulée.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="cancel-delete" class="btn btn-secondary">Annuler</button>
+        <button id="confirm-delete" class="btn btn-danger">Supprimer</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <footer>
+    <div class="container">
+      <p>TaskManager &copy; 2025 - Application de gestion des tâches</p>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/validators.js"></script>
+  <script src="js/taskManager.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

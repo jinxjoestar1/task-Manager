@@ -1,0 +1,203 @@
+/* Responsive styles using a mobile-first approach */
+
+/* Base styles already set in styles.css */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  header .app-description {
+    font-size: var(--font-size-md);
+  }
+  
+  .controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-sort-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .tasks-container {
+    padding: var(--space-3);
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .modal-content {
+    max-width: 95%;
+    margin: 0 var(--space-2);
+  }
+  
+  .toast {
+    min-width: auto;
+    max-width: 90%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .filter-sort-container {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: var(--space-3);
+  }
+  
+  .filter-group, .sort-group {
+    width: 48%;
+  }
+  
+  .controls-row {
+    flex-wrap: wrap;
+  }
+  
+  .task-card .task-header {
+    flex-direction: column;
+  }
+  
+  .task-card .task-actions {
+    margin-top: var(--space-2);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 993px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  .tasks-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-4);
+  }
+  
+  .tasks-list .task-card {
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tasks-list .task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tasks-list .task-description {
+    flex: 1;
+  }
+}
+
+/* Accessibility focus styles */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .task-card:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary: #0000ff;
+    --color-primary-dark: #000080;
+    --color-danger: #ff0000;
+    --color-success: #008000;
+    --color-warning: #b25000;
+    --color-text-primary: #000000;
+    --color-text-light: #ffffff;
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f0f0f0;
+  }
+  
+  .task-card, .modal-content, select, input, textarea, .btn {
+    border: 1px solid #000000;
+  }
+  
+  .task-card.priority-low,
+  .task-card.priority-medium,
+  .task-card.priority-high {
+    border-left-width: 8px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-primary: #1a1a1a;
+    --color-bg-secondary: #121212;
+    --color-bg-tertiary: #2a2a2a;
+    
+    --color-text-primary: #f8f9fa;
+    --color-text-secondary: #e9ecef;
+    --color-text-tertiary: #dee2e6;
+    
+    --color-gray-100: #2a2a2a;
+    --color-gray-200: #343434;
+    --color-gray-300: #424242;
+    --color-gray-400: #575757;
+    --color-gray-500: #717171;
+    --color-gray-600: #8a8a8a;
+    --color-gray-700: #a3a3a3;
+    --color-gray-800: #c1c1c1;
+    --color-gray-900: #e0e0e0;
+  }
+  
+  .task-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal-content {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  }
+  
+  select, input, textarea {
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-400);
+    color: var(--color-text-primary);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-gray-300);
+    color: var(--color-text-primary);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-gray-400);
+  }
+  
+  /* Adjust other colors for dark mode */
+  .priority-high {
+    background-color: rgba(220, 38, 38, 0.2);
+  }
+  
+  .priority-medium {
+    background-color: rgba(217, 119, 6, 0.2);
+  }
+  
+  .priority-low {
+    background-color: rgba(5, 150, 105, 0.2);
+  }
+}
